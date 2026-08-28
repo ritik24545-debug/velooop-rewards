@@ -1,0 +1,144 @@
+.section {
+  padding: 95px 0 105px;
+
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+  width: min(760px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.heading {
+  margin-bottom: 34px;
+  text-align: center;
+}
+
+.eyebrow {
+  color: #00e676;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.heading h2 {
+  max-width: 600px;
+  margin: 9px auto 0;
+
+  color: #ffffff;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  overflow: hidden;
+
+  background: rgba(16, 22, 34, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 13px;
+
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.item:hover,
+.item.open {
+  background: rgba(17, 27, 38, 0.9);
+  border-color: rgba(0, 230, 118, 0.26);
+}
+
+.question {
+  width: 100%;
+  min-height: 66px;
+  padding: 18px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  color: #ffffff;
+  background: transparent;
+  border: 0;
+
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.question svg {
+  flex-shrink: 0;
+  color: #00e676;
+  font-size: 12px;
+}
+
+.question:focus-visible {
+  outline: 2px solid #00e676;
+  outline-offset: -3px;
+}
+
+.answerWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s ease;
+}
+
+.open .answerWrapper {
+  grid-template-rows: 1fr;
+}
+
+.answer {
+  min-height: 0;
+  padding: 0 20px;
+  overflow: hidden;
+
+  color: #8992a6;
+  font-size: 13px;
+  line-height: 1.7;
+  opacity: 0;
+  transition: opacity 0.18s ease, padding 0.22s ease;
+}
+
+.open .answer {
+  padding: 0 20px 20px;
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding: 70px 0 78px;
+  }
+
+  .container {
+    width: min(100% - 28px, 760px);
+  }
+
+  .heading {
+    margin-bottom: 28px;
+  }
+
+  .question {
+    min-height: 62px;
+    padding: 17px;
+    font-size: 13px;
+  }
+
+  .answer {
+    padding-right: 17px;
+    padding-left: 17px;
+  }
+
+  .open .answer {
+    padding-right: 17px;
+    padding-bottom: 17px;
+    padding-left: 17px;
+  }
+}

@@ -1,0 +1,441 @@
+.card {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: #101622;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 230, 118, 0.2);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+}
+
+.imageArea {
+  position: relative;
+  height: 190px;
+  padding: 14px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(0, 230, 118, 0.11),
+      transparent 42%
+    ),
+    #0a0f19;
+}
+
+.imageFrame {
+  width: 100%;
+  height: 100%;
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 13px;
+  overflow: hidden;
+}
+
+.prizeImage {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+  object-position: center;
+
+  transition: transform 0.35s ease;
+}
+
+.card:hover .prizeImage {
+  transform: scale(1.045);
+}
+
+.status {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+
+.status span {
+  display: inline-flex;
+  padding: 6px 9px;
+
+  border-radius: 7px;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.active {
+  color: #00e676;
+  background: rgba(0, 230, 118, 0.1);
+}
+
+.upcoming {
+  color: #c4cad6;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ended {
+  color: #b4bccd;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.featured {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  padding: 6px 9px;
+
+  color: #07110c;
+  background: #00e676;
+  border-radius: 7px;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.body {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 18px;
+}
+
+.category {
+  color: #00e676;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.body h3 {
+  margin: 6px 0 7px;
+
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.body p {
+  margin: 0;
+
+  color: #8992a6;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  margin-top: 14px;
+  padding: 12px 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.meta div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #7f899e;
+  font-size: 11px;
+}
+
+.meta svg {
+  color: #00e676;
+  font-size: 11px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.entry span {
+  color: #707a8e;
+  font-size: 10px;
+}
+
+.entry strong {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.joinButton {
+  min-height: 38px;
+  padding: 0 13px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  color: #06100a;
+  background: #00e676;
+  border-radius: 9px;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.joinButton:hover {
+  background: #18ef87;
+  transform: translateX(2px);
+}
+
+.joinButton:disabled {
+  cursor: not-allowed;
+  color: #8992a6;
+  background: #1a2130;
+  opacity: 0.8;
+}
+
+.joinButton:disabled:hover {
+  transform: none;
+}
+
+.skeletonCard {
+  pointer-events: none;
+}
+
+.skeletonBlock,
+.skeletonLine,
+.skeletonStats,
+.skeletonCountdown,
+.skeletonFooter {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+.skeletonBlock {
+  width: 100%;
+  height: 100%;
+  border-radius: 13px;
+}
+
+.skeletonLine {
+  height: 10px;
+  border-radius: 5px;
+}
+
+.skeletonCategory {
+  width: 28%;
+}
+
+.skeletonTitle {
+  width: 62%;
+  height: 22px;
+  margin-top: 14px;
+}
+
+.skeletonText {
+  width: 92%;
+  margin-top: 12px;
+}
+
+.skeletonTextShort {
+  width: 70%;
+  margin-top: 8px;
+}
+
+.skeletonStats {
+  height: 45px;
+  margin-top: 14px;
+  border-radius: 4px;
+}
+
+.skeletonCountdown {
+  height: 59px;
+  margin-top: 18px;
+  border-radius: 10px;
+}
+
+.skeletonFooter {
+  height: 38px;
+  margin-top: 14px;
+  border-radius: 9px;
+}
+
+@keyframes skeletonPulse {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonBlock,
+  .skeletonLine,
+  .skeletonStats,
+  .skeletonCountdown,
+  .skeletonFooter {
+    animation: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .imageArea {
+    height: 175px;
+  }
+
+  .body {
+    padding: 17px;
+  }
+}
+.prizeRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  margin-top: 14px;
+  padding: 12px 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.prizeRow > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.prizeRow > div + div {
+  padding-left: 18px;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.prizeRow span {
+  color: #707a8e;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.prizeRow strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.prizeRow strong svg {
+  color: #00e676;
+  font-size: 11px;
+}
+
+.progressSection {
+  margin-top: 14px;
+}
+
+.progressInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+}
+
+.progressInfo span {
+  color: #707a8e;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.progressInfo strong {
+  color: #00e676;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 5px;
+
+  overflow: hidden;
+
+  background: #202735;
+  border-radius: 99px;
+}
+
+.progressBar {
+  height: 100%;
+
+  background: #00e676;
+  border-radius: inherit;
+
+  transition: width 0.5s ease;
+}
+
+.entryCount {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #596477;
+  font-size: 8px;
+  text-align: right;
+}
+@media (max-width: 500px) {
+  .prizeRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .joinButton {
+    width: 100%;
+  }
+}

@@ -1,0 +1,344 @@
+.tabsWrapper {
+  min-width: 0;
+}
+
+.tabList {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 4px;
+  gap: 4px;
+
+  background: #101622;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+}
+
+.tab {
+  min-height: 42px;
+  padding: 0 17px;
+
+  color: #8992a6;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+
+  font-size: 12px;
+  font-weight: 700;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.tab:hover {
+  color: #ffffff;
+}
+
+.tab:focus-visible {
+  outline: 2px solid #00e676;
+  outline-offset: 2px;
+}
+
+.activeTab {
+  color: #06100a;
+  background: #00e676;
+  border-color: #00e676;
+}
+
+.panel {
+  margin-top: 18px;
+  animation: panelIn 0.25s ease both;
+}
+
+.panel:focus-visible {
+  outline: 2px solid rgba(0, 230, 118, 0.7);
+  outline-offset: 5px;
+}
+
+.winnerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.winnerCard {
+  min-width: 0;
+  min-height: 190px;
+  padding: 20px;
+
+  background: #101622;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 15px;
+
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.winnerCard:nth-child(2) {
+  background: #111a25;
+}
+
+.winnerCard:nth-child(3) {
+  background: #101824;
+}
+
+.winnerCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 230, 118, 0.3);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #07110c;
+  background: #00e676;
+  border-radius: 50%;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 4px;
+
+  color: #8df7b9;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.status svg {
+  color: #00e676;
+  font-size: 11px;
+}
+
+.winnerInfo {
+  margin-top: 24px;
+}
+
+.identity {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 9px;
+}
+
+.winnerInfo h3 {
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.identity span {
+  color: #7f899e;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.winnerInfo p {
+  margin-top: 6px;
+
+  color: #d7dce7;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 13px;
+
+  color: #8992a6;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.category svg {
+  color: #00e676;
+  font-size: 10px;
+}
+
+.claimButton {
+  min-height: 36px;
+  margin-top: 16px;
+  padding: 0 12px;
+
+  color: #06100a;
+  background: #00e676;
+  border: 1px solid #00e676;
+  border-radius: 8px;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.claimButton:hover {
+  background: #18ef86;
+}
+
+.claimButton:focus-visible {
+  outline: 2px solid #00e676;
+  outline-offset: 2px;
+}
+
+.emptyState {
+  min-height: 150px;
+  padding: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #8992a6;
+  background: rgba(16, 22, 34, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 13px;
+
+  font-size: 13px;
+  text-align: center;
+}
+
+.state {
+  grid-column: 1 / -1;
+}
+
+.skeletonCard {
+  pointer-events: none;
+}
+
+.skeletonAvatar,
+.skeletonStatus,
+.skeletonLine {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+.skeletonAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+.skeletonStatus {
+  width: 74px;
+  height: 10px;
+  margin-top: 4px;
+  border-radius: 5px;
+}
+
+.skeletonLine {
+  width: 48%;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.skeletonPrize {
+  width: 72%;
+  height: 11px;
+  margin-top: 10px;
+}
+
+.skeletonCategory {
+  width: 55%;
+  height: 10px;
+  margin-top: 14px;
+}
+
+@keyframes skeletonPulse {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonAvatar,
+  .skeletonStatus,
+  .skeletonLine {
+    animation: none;
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 800px) {
+  .winnerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .winnerCard:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .winnerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .winnerCard:last-child {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabList {
+    display: flex;
+    width: 100%;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .winnerCard {
+    min-height: 0;
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab,
+  .winnerCard {
+    transition: none;
+  }
+
+  .panel {
+    animation: none;
+  }
+}

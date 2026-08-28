@@ -1,0 +1,279 @@
+.backdrop {
+  position: fixed;
+  z-index: 1200;
+  inset: 0;
+  padding: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(3, 6, 12, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal {
+  width: min(620px, 100%);
+  max-height: min(760px, calc(100vh - 48px));
+  overflow-y: auto;
+  padding: 28px;
+
+  background: #101622;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
+  animation: modalIn 0.2s ease both;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  color: #00e676;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.header h2 {
+  margin-top: 8px;
+
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.closeButton {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #b4bccd;
+  background: #151b2a;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9px;
+}
+
+.closeButton:hover,
+.closeButton:focus-visible {
+  color: #00e676;
+  border-color: rgba(0, 230, 118, 0.4);
+}
+
+.closeButton:focus-visible,
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #00e676;
+  outline-offset: 2px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.intro {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.intro span {
+  color: #8992a6;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field label {
+  color: #d7dce7;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 11px 12px;
+
+  color: #ffffff;
+  background: #151b2a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+
+  font-size: 13px;
+  line-height: 1.4;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  background: #182131;
+  border-color: rgba(0, 230, 118, 0.5);
+}
+
+.field input[aria-invalid='true'],
+.field textarea[aria-invalid='true'] {
+  border-color: #ff8e8e;
+}
+
+.error {
+  color: #ffadad;
+  font-size: 11px;
+}
+
+.helper,
+.demoNote {
+  color: #8992a6;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.demoNote {
+  padding-top: 2px;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 44px;
+  padding: 0 17px;
+
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.primaryButton {
+  color: #06100a;
+  background: #00e676;
+  border: 1px solid #00e676;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: #18ef86;
+}
+
+.primaryButton:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.secondaryButton {
+  color: #ffffff;
+  background: #151b2a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.secondaryButton:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.successState,
+.emptyState {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 14px 10px;
+  text-align: center;
+}
+
+.successState > svg,
+.emptyState > svg {
+  color: #00e676;
+  font-size: 28px;
+}
+
+.successState p,
+.emptyState p {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.successState span {
+  max-width: 380px;
+  color: #8992a6;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 560px) {
+  .backdrop {
+    align-items: flex-end;
+    padding: 12px;
+  }
+
+  .modal {
+    max-height: calc(100vh - 24px);
+    padding: 22px 18px;
+    border-radius: 14px;
+  }
+
+  .header h2 {
+    font-size: 24px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .field input,
+  .field textarea,
+  .primaryButton,
+  .secondaryButton {
+    animation: none;
+    transition: none;
+  }
+}
