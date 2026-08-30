@@ -4,6 +4,7 @@ import {
   FaUsers,
   FaTrophy,
 } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 import Countdown from '../Countdown/Countdown'
 import { mockDataStates } from '../../data/mockDataStates'
@@ -140,21 +141,14 @@ function GiveawayCard({ giveaway }) {
             </strong>
           </div>
 
-          {giveaway.status === 'ENDED' ? (
-            <a href="#winners" className={styles.joinButton}>
-              {presentation.actionLabel}
-              <FaArrowRight />
-            </a>
-          ) : (
-            <button
-              type="button"
-              className={styles.joinButton}
-              disabled={giveaway.status === 'UPCOMING'}
-            >
-              {presentation.actionLabel}
-              <FaArrowRight />
-            </button>
-          )}
+          <Link
+            to={`/giveaway/${giveaway.slug}`}
+            className={styles.joinButton}
+            aria-disabled={giveaway.status === 'UPCOMING'}
+          >
+            {presentation.actionLabel}
+            <FaArrowRight />
+          </Link>
         </div>
       </div>
     </article>

@@ -41,9 +41,13 @@ const giveawayRules = [
   },
 ]
 
-function GiveawayRules() {
+function GiveawayRules({ compact = false }) {
   return (
-    <section className={styles.section} id="rules" aria-labelledby="rules-title">
+    <section
+      className={`${styles.section} ${compact ? styles.compactSection : ''}`}
+      id="rules"
+      aria-labelledby="rules-title"
+    >
       <div className={styles.container}>
         <div className={styles.heading}>
           <span className={styles.eyebrow}>GIVEAWAY RULES</span>
@@ -51,7 +55,7 @@ function GiveawayRules() {
           <p>Clear participation guidelines so every giveaway stays simple and transparent.</p>
         </div>
 
-        <div className={styles.ruleGrid}>
+        <div className={`${styles.ruleGrid} ${compact ? styles.compactGrid : ''}`}>
           {giveawayRules.map((rule) => {
             const Icon = rule.icon
 

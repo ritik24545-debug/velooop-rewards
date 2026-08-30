@@ -1,0 +1,418 @@
+.pageShell {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 80px;
+}
+
+.container {
+  display: grid;
+  gap: 28px;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #9ba7be;
+  font-size: 13px;
+}
+
+.demoToggle {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #ebf7ff;
+  font-size: 12px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.imagePanel {
+  display: grid;
+  gap: 18px;
+}
+
+.imageWrap {
+  display: grid;
+  place-items: center;
+  min-height: 420px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(0, 230, 118, 0.1), transparent 38%),
+    rgba(16, 22, 34, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+}
+
+.prizeImage {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 18px;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.badge,
+.categoryBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.activeBadge {
+  color: #00e676;
+  background: rgba(0, 230, 118, 0.09);
+}
+
+.upcomingBadge {
+  color: #d4d9e6;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.endedBadge {
+  color: #b6bfd1;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.categoryBadge {
+  color: #dfeaff;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contentPanel {
+  display: grid;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.headerBlock {
+  display: grid;
+  gap: 12px;
+}
+
+.eyebrow {
+  color: #00e676;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.headerBlock h1 {
+  color: #ffffff;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.06em;
+}
+
+.headerBlock p {
+  color: #a7b0c2;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.metricRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.metricRow div {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  color: #dfeaf5;
+  font-size: 12px;
+}
+
+.metricRow svg {
+  color: #00e676;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.detailItem {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  background: rgba(16, 22, 34, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+}
+
+.detailItem span {
+  color: #8f9ab0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.detailItem strong {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.countdownWrap,
+.balanceWrap,
+.eligibilityBox,
+.rulesWrap {
+  display: grid;
+  gap: 12px;
+}
+
+.warning {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(255, 163, 0, 0.08);
+  border: 1px solid rgba(255, 163, 0, 0.2);
+  border-radius: 12px;
+  color: #fbd187;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.warning svg {
+  color: #f3b845;
+}
+
+.ctaGroup {
+  display: grid;
+  gap: 10px;
+}
+
+.primaryAction,
+.secondaryAction,
+.successButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.primaryAction {
+  border: none;
+  background: #00e676;
+  color: #06110b;
+}
+
+.primaryAction:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.secondaryAction {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.stateBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: rgba(0, 230, 118, 0.08);
+  border: 1px solid rgba(0, 230, 118, 0.2);
+  border-radius: 12px;
+  color: #c9f9de;
+}
+
+.stateBox svg {
+  color: #00e676;
+}
+
+.stateBox strong,
+.stateBox span {
+  display: block;
+}
+
+.stateBox strong {
+  font-size: 15px;
+}
+
+.stateBox span {
+  margin-top: 4px;
+  color: #a9d7c1;
+  font-size: 12px;
+}
+
+.loginPrompt {
+  color: #a3adbf;
+  font-size: 13px;
+}
+
+.eligibilityBox {
+  padding: 18px;
+  background: rgba(16, 22, 34, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+}
+
+.eligibilityHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.eligibilityHeader h2 {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.eligibilityHeader svg {
+  color: #00e676;
+}
+
+.eligibilityBox p {
+  color: #a8afc1;
+  line-height: 1.7;
+}
+
+.successBanner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: rgba(0, 230, 118, 0.08);
+  border: 1px solid rgba(0, 230, 118, 0.18);
+  border-radius: 18px;
+  animation: fadeIn 0.25s ease;
+}
+
+.successIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background: rgba(0, 230, 118, 0.14);
+  border-radius: 50%;
+  color: #00e676;
+  font-size: 22px;
+}
+
+.successBanner h2 {
+  color: #ffffff;
+  font-size: 22px;
+}
+
+.successBanner p {
+  color: #c9f9de;
+  font-size: 14px;
+}
+
+.successMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  color: #dff6eb;
+  font-size: 12px;
+}
+
+.successButton {
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.emptyFallback {
+  margin-top: 30px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .imageWrap {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 540px) {
+  .pageShell {
+    width: min(100% - 20px, 1200px);
+    padding-top: 20px;
+  }
+
+  .topBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .successBanner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .successButton {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .successBanner {
+    animation: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

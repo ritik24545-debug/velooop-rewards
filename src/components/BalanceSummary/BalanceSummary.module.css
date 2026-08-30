@@ -1,0 +1,29 @@
+.summary {
+  display: grid;
+  gap: 10px;
+  padding: 18px 18px 10px;
+  background: rgba(16, 22, 34, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.row span {
+  color: #9aa5ba;
+  font-size: 12px;
+}
+
+.row strong {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+}

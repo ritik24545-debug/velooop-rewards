@@ -46,6 +46,15 @@
   gap: 16px;
 }
 
+.compactSection {
+  padding: 0;
+  border-top: none;
+}
+
+.compactGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .rule {
   min-height: 164px;
   padding: 20px;
