@@ -143,6 +143,63 @@
   border-color: rgba(255, 255, 255, 0.16);
 }
 
+.accountMenu {
+  position: relative;
+}
+
+.accountDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 10;
+  width: 230px;
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+  background: #101622;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.accountDropdown strong {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.accountDropdown span {
+  overflow: hidden;
+  color: #8992a6;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logoutButton {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px 0;
+  color: #ffb4b4;
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.errorMessage {
+  padding: 11px 12px;
+  color: #ffb4b4;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 /* Mobile Menu */
 
 .menuButton {
@@ -297,6 +354,12 @@
 .submitButton:hover {
   background: #18ef86;
   transform: translateY(-1px);
+}
+
+.submitButton:disabled,
+.signInForm input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 .createAccount {

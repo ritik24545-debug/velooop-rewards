@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Galaxy from './components/Galaxy/Galaxy'
@@ -12,8 +12,19 @@ import WinnerSlider from './components/WinnerSlider/WinnerSlider'
 import FAQ from './components/FAQ/FAQ'
 import Footer from './components/Footer/Footer'
 import GiveawayDetails from './pages/GiveawayDetails/GiveawayDetails'
+import Signup from './pages/Signup/Signup'
 import ErrorState from './components/ErrorState/ErrorState'
-import { mockUserState } from './data/mockUserState'
+import { clearAuthSession, getAuthenticatedUser, getAuthToken } from './services/api'
+
+const loggedOutUser = {
+  loggedIn: false,
+  userId: null,
+  name: '',
+  email: '',
+  balances: { VEs: 0, SVEs: 0, Tokens: 0 },
+  participations: [],
+  winnerProfile: null,
+}
 
 function HomePage() {
   return (
@@ -42,7 +53,40 @@ function NotFoundPage() {
 }
 
 function App() {
-  const [user, setUser] = useState(mockUserState)
+  const [user, setUser] = useState(loggedOutUser)
+
+  useEffect(() => {
+    const token = getAuthToken()
+
+    if (!token) {
+      return undefined
+    }
+
+    let isActive = true
+
+    getAuthenticatedUser(token)
+      .then((response) => {
+        if (!isActive || !response?.data?.user) {
+          return
+        }
+
+        setUser((previousUser) => ({
+          ...previousUser,
+          ...response.data.user,
+          loggedIn: true,
+        }))
+      })
+      .catch(() => {
+        clearAuthSession()
+        if (isActive) {
+          setUser(loggedOutUser)
+        }
+      })
+
+    return () => {
+      isActive = false
+    }
+  }, [])
 
   return (
     <BrowserRouter>
@@ -65,7 +109,7 @@ function App() {
         </div>
 
         <div className="app-content">
-          <Navbar />
+          <Navbar user={user} setUser={setUser} />
 
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -73,6 +117,7 @@ function App() {
               path="/giveaway/:slug"
               element={<GiveawayDetails user={user} setUser={setUser} />}
             />
+            <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
 

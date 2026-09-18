@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { Link } from 'react-router-dom'
 import {
   FaBars,
   FaTimes,
@@ -7,11 +8,16 @@ import {
   FaTrophy,
   FaUser,
 } from 'react-icons/fa'
+import { clearAuthSession, loginUser, storeAuthSession } from '../../services/api'
 import styles from './Navbar.module.css'
 
-function Navbar() {
+function Navbar({ user, setUser }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSignInOpen, setIsSignInOpen] = useState(false)
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
+  const [formData, setFormData] = useState({ email: '', password: '' })
+  const [isLoading, setIsLoading] = useState(false)
+  const [loginError, setLoginError] = useState('')
 
   const closeMenu = () => {
     setIsMenuOpen(false)
@@ -19,11 +25,89 @@ function Navbar() {
 
   const openSignIn = () => {
     closeMenu()
+    setIsAccountMenuOpen(false)
+    setLoginError('')
     setIsSignInOpen(true)
+  }
+
+  const toggleAccountMenu = () => {
+    closeMenu()
+    setIsAccountMenuOpen((previousIsOpen) => !previousIsOpen)
   }
 
   const closeSignIn = () => {
     setIsSignInOpen(false)
+  }
+
+  const handleLogout = () => {
+    clearAuthSession()
+    setUser((previousUser) => ({
+      ...previousUser,
+      loggedIn: false,
+      userId: null,
+      name: '',
+      email: '',
+      balances: { VEs: 0, SVEs: 0, Tokens: 0 },
+      participations: [],
+      winnerProfile: null,
+    }))
+    setIsAccountMenuOpen(false)
+  }
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setFormData((previousFormData) => ({ ...previousFormData, [name]: value }))
+    setLoginError('')
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const email = formData.email.trim().toLowerCase()
+
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      setLoginError('Please enter a valid email address.')
+      return
+    }
+
+    if (!formData.password) {
+      setLoginError('Please enter your password.')
+      return
+    }
+
+    setIsLoading(true)
+    setLoginError('')
+
+    try {
+      const response = await loginUser({ email, password: formData.password })
+      const session = response?.data
+
+      if (!session?.token || !session.user) {
+        throw new Error('Login response was incomplete')
+      }
+
+      storeAuthSession(session)
+      setUser((previousUser) => ({
+        ...previousUser,
+        ...session.user,
+        loggedIn: true,
+      }))
+      setFormData({ email: '', password: '' })
+      closeSignIn()
+    } catch (error) {
+      if (error.statusCode === 401) {
+        setLoginError('The email or password is incorrect.')
+      } else if (error.statusCode === 400) {
+        setLoginError('Please check your email and password and try again.')
+      } else if (error.statusCode >= 500) {
+        setLoginError('The service is unavailable right now. Please try again later.')
+      } else if (error.statusCode === 0) {
+        setLoginError('Unable to reach the service. Please check that the backend is running.')
+      } else {
+        setLoginError('We could not sign you in. Please try again.')
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -43,6 +127,21 @@ function Navbar() {
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isSignInOpen])
+
+  useEffect(() => {
+    if (!isAccountMenuOpen) {
+      return undefined
+    }
+
+    const handleDocumentMouseDown = (event) => {
+      if (!event.target.closest(`.${styles.accountMenu}`)) {
+        setIsAccountMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleDocumentMouseDown)
+    return () => document.removeEventListener('mousedown', handleDocumentMouseDown)
+  }, [isAccountMenuOpen])
 
   return (
     <header className={styles.navbar}>
@@ -73,14 +172,20 @@ function Navbar() {
             Browse Giveaways
           </a>
 
-          <button
-            className={styles.profileButton}
-            type="button"
-            onClick={openSignIn}
-          >
-            <FaUser size={14} />
-            <span>Sign In</span>
-          </button>
+          {user?.loggedIn ? (
+            <div className={styles.accountMenu}>
+              <button className={styles.profileButton} type="button" onClick={toggleAccountMenu}>
+                <FaUser size={14} />
+                <span>Profile</span>
+              </button>
+              {isAccountMenuOpen && <AccountMenu user={user} onLogout={handleLogout} />}
+            </div>
+          ) : (
+            <button className={styles.profileButton} type="button" onClick={openSignIn}>
+              <FaUser size={14} />
+              <span>Sign In</span>
+            </button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -128,14 +233,20 @@ function Navbar() {
               Browse Giveaways
             </a>
 
-            <button
-              className={styles.profileButton}
-              type="button"
-              onClick={openSignIn}
-            >
-              <FaUser size={14} />
-              Sign In
-            </button>
+            {user?.loggedIn ? (
+              <div className={styles.accountMenu}>
+                <button className={styles.profileButton} type="button" onClick={toggleAccountMenu}>
+                  <FaUser size={14} />
+                  Profile
+                </button>
+                {isAccountMenuOpen && <AccountMenu user={user} onLogout={handleLogout} />}
+              </div>
+            ) : (
+              <button className={styles.profileButton} type="button" onClick={openSignIn}>
+                <FaUser size={14} />
+                Sign In
+              </button>
+            )}
           </div>
         </nav>
       )}
@@ -174,8 +285,9 @@ function Navbar() {
 
             <form
               className={styles.signInForm}
-              onSubmit={(event) => event.preventDefault()}
+              onSubmit={handleSubmit}
             >
+              {loginError && <div className={styles.errorMessage} role="alert">{loginError}</div>}
               <label htmlFor="sign-in-email">Email</label>
               <input
                 id="sign-in-email"
@@ -185,6 +297,10 @@ function Navbar() {
                 autoComplete="email"
                 required
                 autoFocus
+                value={formData.email}
+                onChange={handleChange}
+                disabled={isLoading}
+                aria-invalid={!!loginError}
               />
 
               <label htmlFor="sign-in-password">Password</label>
@@ -195,15 +311,19 @@ function Navbar() {
                 placeholder="Enter your password"
                 autoComplete="current-password"
                 required
+                value={formData.password}
+                onChange={handleChange}
+                disabled={isLoading}
+                aria-invalid={!!loginError}
               />
 
-              <button className={styles.submitButton} type="submit">
-                Sign In
+              <button className={styles.submitButton} type="submit" disabled={isLoading} aria-busy={isLoading}>
+                {isLoading ? 'Signing In...' : 'Sign In'}
               </button>
 
-              <button className={styles.createAccount} type="button">
+              <Link className={styles.createAccount} to="/signup" onClick={closeSignIn}>
                 Don&apos;t have an account? Create one
-              </button>
+              </Link>
             </form>
           </div>
         </div>
@@ -213,3 +333,15 @@ function Navbar() {
 }
 
 export default Navbar
+
+function AccountMenu({ user, onLogout }) {
+  return (
+    <div className={styles.accountDropdown} role="menu">
+      <strong>{user.name || 'VELOOP member'}</strong>
+      <span>{user.email || 'Authenticated account'}</span>
+      <button type="button" className={styles.logoutButton} onClick={onLogout} role="menuitem">
+        Log out
+      </button>
+    </div>
+  )
+}
